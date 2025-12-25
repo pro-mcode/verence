@@ -1,24 +1,29 @@
 import Image from "next/image";
 
-export default function SocialProviders() {
+type Props = { variant?: "sign-in" | "sign-up" };
+
+export default function SocialProviders({ variant = "sign-in" }: Props) {
   return (
     <div className="space-y-3">
       <button
         type="button"
-        className="flex w-full items-center justify-center gap-3 rounded-md border border-border bg-background py-2.5 text-sm font-medium hover:bg-muted transition"
-        aria-label="Sign in with Google"
+        className="flex w-full items-center justify-center gap-3 rounded-xl border border-light-300 bg-light-100 px-4 py-3 text-body-medium text-dark-900 hover:bg-light-200 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
+        aria-label={`${
+          variant === "sign-in" ? "Continue" : "Sign up"
+        } with Google`}
       >
-        <Image src="/auth/google.svg" alt="Google" width={18} height={18} />
-        Continue with Google
+        <Image src="/google.svg" alt="" width={18} height={18} />
+        <span>Continue with Google</span>
       </button>
-
       <button
         type="button"
-        className="flex w-full items-center justify-center gap-3 rounded-md border border-border bg-background py-2.5 text-sm font-medium hover:bg-muted transition"
-        aria-label="Sign in with Apple"
+        className="flex w-full items-center justify-center gap-3 rounded-xl border border-light-300 bg-light-100 px-4 py-3 text-body-medium text-dark-900 hover:bg-light-200 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
+        aria-label={`${
+          variant === "sign-in" ? "Continue" : "Sign up"
+        } with Apple`}
       >
-        <Image src="/auth/apple.svg" alt="Apple" width={18} height={18} />
-        Continue with Apple
+        <Image src="/apple.svg" alt="" width={18} height={18} />
+        <span>Continue with Apple</span>
       </button>
     </div>
   );
