@@ -1,34 +1,70 @@
-import { db } from "../db";
-import { products } from "../db/schema";
-import Image from "next/image";
+// import { db } from "../db";
+// import { products } from "../db/schema";
+// import Image from "next/image"; from "";
+import Card from "../components/Card";
 
 export default async function HomePage() {
-  const items = await db.select().from(products);
+  // const items = await db.select().from(products);
+
+  const products = [
+    {
+      id: 1,
+      title: "Air Max Pulse",
+      subtitle: "Men's Shoes",
+      meta: "6 Colour",
+      price: 149.99,
+      imageSrc: "/shoes/shoe-1.jpg",
+      badge: { label: "New", tone: "orange" as const },
+    },
+    {
+      id: 2,
+      title: "Air Zoom Pegasus",
+      subtitle: "Men's Shoes",
+      meta: "4 Colour",
+      price: 129.99,
+      imageSrc: "/shoes/shoe-2.webp",
+      badge: { label: "Hot", tone: "red" as const },
+    },
+    {
+      id: 3,
+      title: "InfinityRN 4",
+      subtitle: "Men's Shoes",
+      meta: "6 Colour",
+      price: 159.99,
+      imageSrc: "/shoes/shoe-3.webp",
+      badge: { label: "Trending", tone: "green" as const },
+    },
+    {
+      id: 4,
+      title: "Metcon 9",
+      subtitle: "Men's Shoes",
+      meta: "3 Colour",
+      price: 139.99,
+      imageSrc: "/shoes/shoe-4.webp",
+    },
+  ];
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold mb-8">Nike Collection</h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {items.map((product) => (
-          <div
-            key={product.id}
-            className="border rounded-lg p-4 hover:shadow-lg transition"
-          >
-            <Image
-              src={product.imageUrl}
-              alt={product.name}
-              className="w-full h-48 object-cover rounded"
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section aria-labelledby="latest" className="pb-12">
+        <h2 id="latest" className="mb-6 text-heading-3 text-dark-900">
+          Latest shoes
+        </h2>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((p) => (
+            <Card
+              key={p.id}
+              title={p.title}
+              subtitle={p.subtitle}
+              meta={p.meta}
+              imageSrc={p.imageSrc}
+              price={p.price}
+              badge={p.badge}
+              href={`/products/${p.id}`}
             />
-
-            <h2 className="mt-4 font-semibold">{product.name}</h2>
-            <p className="text-gray-500">{product.brand}</p>
-            <p className="font-bold mt-2">
-              ${(product.price / 100).toFixed(2)}
-            </p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
