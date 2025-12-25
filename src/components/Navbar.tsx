@@ -1,16 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-const NAV_LINKS = [
-  { label: "Men", href: "/products?gender=men" },
-  { label: "Women", href: "/products?gender=women" },
-  { label: "Kids", href: "/products?gender=unisex" },
-  { label: "Collections", href: "/collections" },
-  { label: "Contact", href: "/contact" },
-] as const;
+import { NAV_LINKS } from "../lib/constants";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -22,14 +14,7 @@ export default function Navbar() {
         aria-label="Primary"
       >
         <Link href="/" aria-label="Nike Home" className="flex items-center">
-          <Image
-            src="/logo.svg"
-            alt="Nike"
-            width={28}
-            height={28}
-            priority
-            className="invert"
-          />
+          <div className="text-black text-lg font-bold">VERENCE</div>
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">
