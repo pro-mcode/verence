@@ -1,7 +1,7 @@
 // import { db } from "../db";
 // import { products } from "../db/schema";
 // import Image from "next/image"; from "";
-import Card from "../components/Card";
+import Card from "../../components/Card";
 
 export default async function HomePage() {
   // const items = await db.select().from(products);
