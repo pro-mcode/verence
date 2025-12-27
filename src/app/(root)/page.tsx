@@ -45,7 +45,7 @@ export default async function HomePage() {
   ];
 
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
       <section aria-labelledby="latest" className="pb-12">
         <h2 id="latest" className="mb-6 text-heading-3 text-dark-900">
           Latest shoes
