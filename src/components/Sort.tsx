@@ -11,21 +11,42 @@ const OPTIONS = [
   { label: "Price (Low → High)", value: "price_asc" },
 ] as const;
 
+// export default function Sort() {
+//   const router = useRouter();
+//   const pathname = usePathname();
+//   const searchParams = useSearchParams();
+//   const search = useMemo(() => `?${searchParams.toString()}`, [searchParams]);
+//   const selected = searchParams.get("sort") ?? "featured";
+
+//   const onChange = (value: string) => {
+//     const withSort = setParam(pathname, search, "sort", value);
+//     const withPageReset = setParam(
+//       pathname,
+//       new URL(withSort, "http://dummy").search,
+//       "page",
+//       "1"
+//     );
+//     router.push(withPageReset, { scroll: false });
+//   };
 export default function Sort() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const search = useMemo(() => `?${searchParams.toString()}`, [searchParams]);
+
   const selected = searchParams.get("sort") ?? "featured";
 
   const onChange = (value: string) => {
     const withSort = setParam(pathname, search, "sort", value);
+
     const withPageReset = setParam(
       pathname,
       new URL(withSort, "http://dummy").search,
       "page",
       "1"
     );
+
     router.push(withPageReset, { scroll: false });
   };
 

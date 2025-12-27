@@ -448,6 +448,15 @@ export type RecommendedProduct = {
   imageUrl: string;
 };
 
+function maskEmail(email?: string | null) {
+  if (!email) return "Anonymous";
+
+  const [local] = email.split("@");
+  if (!local) return "Anonymous";
+
+  return `${local.slice(0, 2)}***`;
+}
+
 export async function getProductReviews(productId: string): Promise<Review[]> {
   const rows = await db
     .select({
@@ -466,7 +475,7 @@ export async function getProductReviews(productId: string): Promise<Review[]> {
 
   return rows.map((r) => ({
     id: r.id,
-    author: r.authorName?.trim() || r.authorEmail || "Anonymous",
+    author: r.authorName?.trim() || maskEmail(r.authorEmail),
     rating: r.rating,
     title: undefined,
     content: r.comment || "",
