@@ -251,7 +251,7 @@ export default function ProductGallery({
               alt="Product image"
               fill
               sizes="(min-width:1024px) 720px, 100vw"
-              className="object-cover"
+              className="object-cover border border-red-800"
               priority
             />
 

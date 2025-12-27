@@ -1,48 +1,26 @@
-// import { db } from "../db";
-// import { products } from "../db/schema";
-// import Image from "next/image"; from "";
 import Card from "../../components/Card";
+import { getAllProducts } from "@/lib/actions/product";
+import { NormalizedProductFilters } from "@/lib/utils/query";
 
 export default async function HomePage() {
-  // const items = await db.select().from(products);
+  // Define filters for homepage — latest published products
+  const filters: NormalizedProductFilters = {
+    search: undefined,
+    brandSlugs: [],
+    categorySlugs: [],
+    genderSlugs: [],
+    sizeSlugs: [],
+    colorSlugs: [],
+    priceMin: undefined,
+    priceMax: undefined,
+    priceRanges: [],
+    sort: "newest", // Or leave empty/null if you want default sorting
+    page: 1,
+    limit: 12, // Number of products to fetch
+  };
 
-  const products = [
-    {
-      id: 1,
-      title: "Air Max Pulse",
-      subtitle: "Men's Shoes",
-      meta: "6 Colour",
-      price: 149.99,
-      imageSrc: "/shoes/shoe-1.jpg",
-      badge: { label: "New", tone: "orange" as const },
-    },
-    {
-      id: 2,
-      title: "Air Zoom Pegasus",
-      subtitle: "Men's Shoes",
-      meta: "4 Colour",
-      price: 129.99,
-      imageSrc: "/shoes/shoe-2.webp",
-      badge: { label: "Hot", tone: "red" as const },
-    },
-    {
-      id: 3,
-      title: "InfinityRN 4",
-      subtitle: "Men's Shoes",
-      meta: "6 Colour",
-      price: 159.99,
-      imageSrc: "/shoes/shoe-3.webp",
-      badge: { label: "Trending", tone: "green" as const },
-    },
-    {
-      id: 4,
-      title: "Metcon 9",
-      subtitle: "Men's Shoes",
-      meta: "3 Colour",
-      price: 139.99,
-      imageSrc: "/shoes/shoe-4.webp",
-    },
-  ];
+  // Fetch products from DB
+  const { products } = await getAllProducts(filters);
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -54,12 +32,12 @@ export default async function HomePage() {
           {products.map((p) => (
             <Card
               key={p.id}
-              title={p.title}
-              subtitle={p.subtitle}
-              meta={p.meta}
-              imageSrc={p.imageSrc}
-              price={p.price}
-              badge={p.badge}
+              title={p.name}
+              subtitle={p.subtitle ?? ""}
+              meta=""
+              imageSrc={p.imageUrl ?? "/placeholder.jpg"}
+              price={p.minPrice ?? 0}
+              badge={undefined} // Add logic for "New"/"Trending" badges if needed
               href={`/products/${p.id}`}
             />
           ))}
